@@ -1,0 +1,401 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --beige: #f2e8d9;
+  --paper: #f7f1e6;
+  --brown: #2c2018;
+  --terra: #c4885a;
+  --teal: #3d9e9e;
+  --purple: #6b4fa0;
+}
+
+html {
+  background-color: var(--beige);
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-beige text-brown font-sans antialiased;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+/* Latin labels inside a Hebrew page keep their own direction. */
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Paper grain over everything. Pointer events off so it never blocks clicks. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.13 0 0 0 0 0.09 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--purple);
+  color: var(--paper);
+}
+
+/* A soft purple wash behind the hero portrait, echoing the photo. */
+.hero-wash::before {
+  content: '';
+  position: absolute;
+  inset: -12% -18%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(107, 79, 160, 0.28), rgba(107, 79, 160, 0) 72%);
+}
+
+.btn-primary {
+  @apply rounded-full bg-purple px-6 py-3 font-semibold text-beige hover:bg-tealInk;
+  transition: transform 100ms ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+.btn-primary:focus-visible {
+  outline-color: var(--purple);
+}
+
+/* ---------- film frame ---------- */
+
+.frame {
+  --edge: 9px;
+  position: relative;
+  display: block;
+  background: #2a1f3d;
+  aspect-ratio: 3 / 2;
+  padding: var(--edge) 4px;
+  box-shadow: 0 2px 6px rgba(44, 32, 24, 0.25);
+  color: var(--beige);
+  overflow: hidden;
+}
+
+/* Sprocket holes on the top and bottom film edges. */
+.frame::before,
+.frame::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--edge);
+  background-image: radial-gradient(
+    rgba(242, 232, 217, 0.55) 0 1.1px,
+    transparent 1.3px
+  );
+  background-size: 7px var(--edge);
+  background-position: 3px center;
+  background-repeat: repeat-x;
+  opacity: 0.8;
+}
+.frame::before {
+  top: 0;
+}
+.frame::after {
+  bottom: 0;
+}
+
+.frame__img {
+  position: absolute;
+  inset: var(--edge) 4px;
+  background: #33263a;
+  overflow: hidden;
+}
+
+/* ---------- print (positive on white border) ---------- */
+
+.print {
+  background: var(--paper);
+  padding: 10px 10px 36px;
+  box-shadow: 0 1px 2px rgba(44, 32, 24, 0.12), 0 12px 32px -12px rgba(44, 32, 24, 0.35);
+}
+
+.print__img {
+  position: relative;
+  overflow: hidden;
+  background: var(--brown);
+}
+/* A faint inner edge so a photo never bleeds into the paper around it. */
+.print__img img {
+  outline: 1px solid rgb(0 0 0 / 0.1);
+  outline-offset: -1px;
+}
+
+/* "Developing" — blurred, dim and sepia until the print enters the viewport. */
+.develop {
+  filter: blur(14px) sepia(0.9) brightness(0.55) contrast(0.8);
+  transform: scale(1.02);
+  transition:
+    filter 1.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.is-developed .develop {
+  filter: blur(0) sepia(0) brightness(1) contrast(1);
+  transform: scale(1);
+}
+
+/* ---------- pencil ---------- */
+
+.pencil {
+  stroke: var(--terra);
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hand {
+  font-family: 'Gveret Levin', Assistant, sans-serif;
+  font-weight: 400;
+  color: #8a5228;
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+/* WhatsApp: always there, bottom-left, out of the way of reading. */
+.wa {
+  position: fixed;
+  left: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #2c2018;
+  box-shadow: 0 0 0 2px var(--beige), 0 6px 20px -6px rgba(0, 0, 0, 0.35);
+  transition: transform 100ms ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+.wa:hover {
+  box-shadow: 0 0 0 2px var(--beige), 0 10px 24px -8px rgba(0, 0, 0, 0.4);
+}
+.wa:active {
+  transform: scale(0.95);
+}
+
+/* ---------- film strip ---------- */
+
+.strip {
+  --hole: 10px;
+  background: var(--brown);
+  padding: calc(var(--hole) + 8px) 12px;
+  position: relative;
+}
+.strip::before,
+.strip::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--hole);
+  background-image: radial-gradient(
+    rgba(242, 232, 217, 0.6) 0 2.5px,
+    transparent 3px
+  );
+  background-size: 22px var(--hole);
+  background-position: 11px center;
+  background-repeat: repeat-x;
+}
+.strip::before {
+  top: 5px;
+}
+.strip::after {
+  bottom: 5px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .develop {
+    transition: none;
+    filter: none;
+    transform: none;
+  }
+}
+
+/* ---------- the story (sticky picture + scrolling steps) ---------- */
+
+.story__visual {
+  position: sticky;
+  top: 3rem;
+}
+@media (min-width: 768px) {
+  .story__visual {
+    top: 6rem;
+  }
+}
+@media (max-width: 767px) {
+  .story__visual {
+    z-index: 5;
+    background: var(--beige);
+    padding: 0.5rem 0 0.75rem;
+  }
+}
+
+.step {
+  border-top: 3px solid transparent;
+  opacity: 0.88;
+  transition: opacity 0.4s ease, border-color 0.4s ease;
+}
+.step.is-current {
+  border-top-color: var(--step);
+  opacity: 1;
+}
+
+/* Pictures are drawn in LTR coordinates; Hebrew notes set their own direction. */
+.sv {
+  direction: ltr;
+}
+
+/* Shapes inside a story picture ease between states; text snaps so it never drifts. */
+.sv :not(text) {
+  transition:
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.35s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.sv text {
+  transition: opacity 0.35s ease;
+}
+/* Pencil lines draw themselves. Needs pathLength="1" on the path. */
+.sv .draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.2s ease;
+}
+.sv .draw.is-on {
+  stroke-dashoffset: 0;
+}
+/* The stamp drops in. */
+.sv .stamp {
+  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.25) 0.25s, opacity 0.15s ease 0.25s;
+}
+
+/* cover: the print develops on load */
+.cover-develop {
+  filter: blur(8px) sepia(1) brightness(0.7) contrast(0.8);
+  opacity: 0;
+  transition: filter 1.2s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.6s ease;
+}
+.is-developed .cover-develop {
+  filter: none;
+  opacity: 1;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+.snap-x > * {
+  scroll-snap-align: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sv :not(text), .sv text, .sv .draw, .sv .stamp { transition: none; }
+  .sv .draw { stroke-dashoffset: 0; }
+  .cover-develop { transition: none; filter: none; opacity: 1; }
+  .step { transition: none; opacity: 1; }
+}
+
+/* ---------- colour bands: full-width sections from the palette ---------- */
+
+.band--purple { background: #4a3570; }
+.band--teal { background: #17585a; }
+.band--plum { background: #2a1f3d; }
+
+.band--purple, .band--teal, .band--plum { color: var(--beige); }
+
+.band--purple :is(.text-brown\/60, .text-brown\/65, .text-brown\/70, .text-brown\/75, .text-brown\/80, .text-brown\/85),
+.band--teal :is(.text-brown\/60, .text-brown\/65, .text-brown\/70, .text-brown\/75, .text-brown\/80, .text-brown\/85),
+.band--plum :is(.text-brown\/60, .text-brown\/65, .text-brown\/70, .text-brown\/75, .text-brown\/80, .text-brown\/85) {
+  color: rgba(242, 232, 217, 0.92);
+}
+
+.band--purple :is(.text-tealInk, .text-purple, .text-terraInk),
+.band--teal :is(.text-tealInk, .text-purple, .text-terraInk),
+.band--plum :is(.text-tealInk, .text-purple, .text-terraInk) {
+  color: #f6cfa8;
+}
+
+.band--purple :is(.decoration-tealInk\/40),
+.band--teal :is(.decoration-tealInk\/40),
+.band--plum :is(.decoration-tealInk\/40) {
+  text-decoration-color: rgba(246, 207, 168, 0.5);
+}
+
+.band--purple :is(.border-brown\/15, .divide-brown\/15 > *),
+.band--plum :is(.border-brown\/15, .divide-brown\/15 > *) {
+  border-color: rgba(242, 232, 217, 0.25);
+}
+
+.band--teal .border-teal\/70 { border-color: #f6cfa8; }
+.band--purple a:hover,
+.band--teal a:hover,
+.band--plum a:hover {
+  color: var(--beige);
+}
+
+/* The forecast dashboard arrives over the frame when the story reaches its result. */
+@keyframes cdash-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.cdash-layer {
+  animation: cdash-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cdash-layer { animation: none; }
+}
+
+/* Photo strip: fade whichever edge still has photos to scroll to. RTL, so the
+   strip starts at the right and the fade direction runs to the left. */
+@property --fade-start { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --fade-end { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@keyframes fade-start { from { --fade-start: 0px; } to { --fade-start: 2.5rem; } }
+@keyframes fade-end { from { --fade-end: 2.5rem; } to { --fade-end: 0px; } }
+.scroll-fade-x {
+  mask-image: linear-gradient(to left, transparent, black var(--fade-start), black calc(100% - var(--fade-end)), transparent);
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-fade-x {
+    animation: fade-start 1ms linear both, fade-end 1ms linear both;
+    animation-range: 0 3rem, calc(100% - 3rem) 100%;
+    animation-timeline: scroll(self x);
+  }
+}
+@supports not (animation-timeline: scroll()) {
+  .scroll-fade-x { --fade-start: 2.5rem; --fade-end: 2.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary, .wa { transition: none; }
+}

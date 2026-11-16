@@ -1,0 +1,47 @@
+# דיאנה דיקובסקי · תוכנה לסוכני ביטוח ופנסיה
+
+> Diana Dikovski is a software engineer (14 years) based in Tel Aviv who builds custom tools for Israeli
+> insurance and pension agents, agencies and agent houses (בתי סוכן): analysis of the agency's Excel files,
+> dashboards and reports, operations automation, commission forecasting, and AI agents. First contact is
+> on WhatsApp: +972-50-555-7072. The site is in Hebrew.
+
+## מי אני / Who
+
+- מתכנתת עם 14 שנות ניסיון. 8 שנים ב־ironSource (מסטארטאפ לחברה ציבורית), 4 שנים כמפתחת בכירה ב־Incredibuild, ומאז 2026 עצמאית.
+- עובדת רק עם סוכני ביטוח ופנסיה, סוכנויות ובתי סוכן בישראל.
+- סטאק: React, Vue, TypeScript, Node.js, AWS, LangChain. UX background.
+
+## מה אני בונה / Services
+
+- ניתוח הדוחות והבקרות של הסוכנות ודשבורד אחד שמראה את התיק: מה נכנס, מה צפוי, איפה החורים.
+- אוטומציה למה שקורה אחרי שמורידים את הדוחות: קליטה, איחוד, מעקב. את ההורדה מהיצרנים עדיין עושים ידנית.
+- דוחות שחוזרים על עצמם, ומעקב אחרי חידושים, ביטולים וגבייה.
+- עזרי AI עם גבולות ברורים: כסף נשאר בקוד, מילים במודל, אדם מאשר.
+
+## איך עובדים / Process
+
+1. שיחה בוואטסאפ, רבע שעה, בלי תשלום ובלי התחייבות.
+2. אפיון של עמוד אחד: מפגש עבודה אחד במחיר קבוע וקטן. מה בונים, כמה זמן, כמה עולה. המסמך של הלקוח גם אם לא ממשיכים.
+3. בנייה בשלבים, רואים את הכלי עובד תוך כדי.
+4. אחרי ההשקה הקוד של הלקוח. כל מה שהכלי עושה נראה ומתועד.
+
+## דוגמה / Example
+
+- [תחזית עמלות לסוכן פנסיוני](https://dianadikovski.com/#example): חמישה דוחות, הרבה כללים, חישוב אחד. מסך אחד עם מה שנכנס ותחזית לחודשים הבאים בשלוש רמות סבירות.
+
+## מה הלקוח אמר / Client feedback
+
+- "זה נתן לי הרבה ודאות. משהו שממש היה חסר לי קודם." (סוכן ביטוח ופנסיה עצמאי, הלקוח של כלי תחזית העמלות)
+
+## רקע / Background
+
+- 8 years at ironSource (startup to public company), 4 years as a senior developer at Incredibuild. Broad experience: large-scale systems, dense data screens, legacy rewrites, architecture, team lead. In 2026 an AI customer-service assistant that decides payouts by rules with a human approving every step.
+- Works under NDA. Client data does not pass through her to anywhere else. Client owns the code after launch.
+
+## קישורים / Links
+
+- [דף הבית](https://dianadikovski.com/)
+- [מי אני](https://dianadikovski.com/about/)
+- [LinkedIn](https://www.linkedin.com/in/diana-dikovski-1b4b7928/)
+- Email: dianadi09@gmail.com
+- WhatsApp: https://wa.me/972505557072

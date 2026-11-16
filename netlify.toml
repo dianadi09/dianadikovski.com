@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Keep the Playwright browser inside node_modules so Netlify caches it between builds.
+  PLAYWRIGHT_BROWSERS_PATH = "0"

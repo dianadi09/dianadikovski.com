@@ -1,0 +1,185 @@
+/* The forecast dashboard: one window on the story frame's plum ground,
+   inset at the sides and running off the bottom. */
+.cdash .ss-stage {
+  overflow: hidden;
+  background: transparent;
+}
+
+.cdash .cdash-win {
+  position: absolute;
+  top: 44px;
+  left: 50%;
+  width: 552px;
+  translate: -50% 0;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.cdash .ss-stage[data-layout='compact'] .cdash-win {
+  top: 16px;
+  width: 326px;
+}
+
+.cdash .cdash-body {
+  display: grid;
+  gap: 16px;
+  min-height: 470px;
+  align-content: start;
+  padding: 24px 40px 60px;
+  background: var(--ss-surface);
+}
+
+.cdash .ss-stage[data-layout='compact'] .cdash-body {
+  gap: 10px;
+  padding: 14px 24px 40px;
+}
+
+.cdash .cdash-head {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+}
+
+.cdash .cdash-label {
+  color: var(--ss-text);
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.cdash .cdash-value {
+  color: var(--ss-text-strong);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.cdash .cdash-range {
+  min-height: 18px;
+  color: var(--ss-text-faint);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.cdash .ss-stage[data-layout='compact'] .cdash-value {
+  font-size: 24px;
+}
+
+.cdash .ss-stage[data-layout='compact'] .cdash-label,
+.cdash .ss-stage[data-layout='compact'] .cdash-range {
+  font-size: 12px;
+}
+
+.cdash .cdash-plot {
+  position: relative;
+}
+
+.cdash .cdash-plot .ss-chart {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* The forecast: a soft band from low to high, the likely line dashed through it */
+.cdash .cdash-forecast {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition:
+    opacity 0.4s ease,
+    clip-path 0.9s cubic-bezier(0.45, 0, 0.2, 1);
+}
+
+.cdash .cdash-forecast[data-on] {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+.cdash .cdash-forecast polygon {
+  fill: #6b4fa0;
+  fill-opacity: 0.16;
+}
+
+.cdash .cdash-forecast polyline {
+  fill: none;
+  stroke: #6b4fa0;
+  stroke-width: 2;
+  stroke-dasharray: 5 5;
+  stroke-linecap: round;
+}
+
+.cdash .cdash-today {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px dashed var(--ss-line-strong, var(--ss-line));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.cdash .cdash-today[data-on] {
+  opacity: 1;
+}
+
+.cdash .cdash-today span {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  color: var(--ss-text-faint);
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* The month under the pointer */
+.cdash .cdash-hair {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  margin-left: -0.5px;
+  background: var(--ss-line);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.cdash .cdash-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border: 2px solid var(--ss-surface);
+  border-radius: 50%;
+  background: var(--ss-accent);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.18);
+  opacity: 0;
+  transition:
+    opacity 0.15s ease,
+    background-color 0.2s ease;
+}
+
+.cdash .cdash-dot[data-future] {
+  background: #6b4fa0;
+}
+
+.cdash .cdash-hair[data-on],
+.cdash .cdash-dot[data-on] {
+  opacity: 1;
+}
+
+.cdash .cdash-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -6px;
+  color: var(--ss-text-faint);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+/* The phone design drops the month axis: no room for it whole above the crop */
+.cdash .ss-stage[data-layout='compact'] .cdash-axis {
+  display: none;
+}
