@@ -27,7 +27,7 @@ const server = createServer(async (req, res) => {
 await new Promise((r) => server.listen(0, r))
 const base = `http://localhost:${server.address().port}`
 
-// Hosted builders (Netlify, Cloudflare) have Playwright but no browser. Install one on
+// Hosted builders may have Playwright but no browser. Install one on
 // demand; if that is impossible, ship the plain SPA instead of failing the build.
 async function launch() {
   try {
